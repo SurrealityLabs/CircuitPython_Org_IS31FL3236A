@@ -2,8 +2,8 @@ Introduction
 ============
 
 
-.. image:: https://readthedocs.org/projects/circuitpython-is31fl3236a/badge/?version=latest
-    :target: https://circuitpython-is31fl3236a.readthedocs.io/
+.. image:: https://readthedocs.org/projects/circuitpython-org-is31fl3236a/badge/?version=latest
+    :target: https://circuitpython-org-is31fl3236a.readthedocs.io/
     :alt: Documentation Status
 
 
