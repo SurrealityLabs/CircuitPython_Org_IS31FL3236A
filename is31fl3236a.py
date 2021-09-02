@@ -16,7 +16,8 @@ Implementation Notes
 
 **Hardware:**
 
-* Any device using the IS31FL3236A from Lumissil: https://www.lumissil.com/assets/pdf/core/FIS31FL3236A_DS.pdf
+* Any device using the IS31FL3236A from Lumissil:
+  https://www.lumissil.com/assets/pdf/core/FIS31FL3236A_DS.pdf
 
 **Software and Dependencies:**
 
