@@ -21,7 +21,7 @@ Introduction
     :target: https://github.com/psf/black
     :alt: Code Style: Black
 
-CircuitPython helper library for the IS31FL3236A LED driver IC
+CircuitPython driver for the IS31FL3236A 36-channel 8-bit PWM LED driver chip
 
 
 Dependencies

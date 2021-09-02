@@ -68,12 +68,12 @@ class PWMChannel:
             raise ValueError("Out of range")
 
         if value == 0x0000:
-            self._is31fl.led_regs[self._index] = 0x00
+            self._is31fl.led_regs[self._index] = (0x00,)
         else:
             # Shift our value by four because the IS31FL3236A is only 8 bits but our value is 16
             value = value >> 8
-            self._is31fl.pwm_regs[self._index] = value
-            self._is31fl.led_regs[self._index] = 0x01
+            self._is31fl.pwm_regs[self._index] = (value,)
+            self._is31fl.led_regs[self._index] = (0x01,)
 
         self._is31fl.apply_reg = 0x00
 
