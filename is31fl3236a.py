@@ -75,9 +75,9 @@ class PWMChannel:
             # Shift our value by four because the IS31FL3236A is only 8 bits but our value is 16
             value = value >> 8
             self._is31fl.pwm_regs[self._index] = value
-			self._is31fl.led_regs[self._index] = 0x01
-			
-		self._is31fl.apply_reg = 0x00
+            self._is31fl.led_regs[self._index] = 0x01
+
+        self._is31fl.apply_reg = 0x00
 
 
 class IS31FLChannels:  # pylint: disable=too-few-public-methods
@@ -106,13 +106,13 @@ class IS31FL3236A:
     """
 
     # Registers:
-	shutdown_reg = UnaryStruct(0x00, "<B")
-	pwm_regs = UnaryStructArray(0x01, "<B", 36)
-	apply_reg = UnaryStruct(0x25, "<B")
-	led_regs = UnaryStructArray(0x26, "<B", 36)
-	global_control_reg = UnaryStruct(0x4A, "<B")
-	frequency_reg = UnaryStruct(0x4B, "<B")
-	reset_reg = UnaryStruct(0x4C, "<B")
+    shutdown_reg = UnaryStruct(0x00, "<B")
+    pwm_regs = UnaryStructArray(0x01, "<B", 36)
+    apply_reg = UnaryStruct(0x25, "<B")
+    led_regs = UnaryStructArray(0x26, "<B", 36)
+    global_control_reg = UnaryStruct(0x4A, "<B")
+    frequency_reg = UnaryStruct(0x4B, "<B")
+    reset_reg = UnaryStruct(0x4C, "<B")
 
     def __init__(self, i2c_bus, *, address=0x3C):
         self.i2c_device = i2c_device.I2CDevice(i2c_bus, address)
@@ -123,27 +123,27 @@ class IS31FL3236A:
     def reset(self):
         """Reset the chip."""
         self.reset_reg = 0x00
-		self.shutdown_reg = 0x01
+        self.shutdown_reg = 0x01
 
     @property
     def frequency(self):
         """The overall PWM frequency in Hertz. Valid values for IS31FL3236A are 3000 Hz and 22000 Hz"""
         if self.frequency_reg == 0x00:
-			return 3000
-		else:
-			return 220000
+            return 3000
+        else:
+            return 220000
 
     @frequency.setter
     def frequency(self, freq):
-		if freq == 3000:
-			self.frequency_reg = 0x00
-		elif freq == 22000:
-			self.frequency_reg = 0x01
-		else:
-			raise ValueError("IS31FL3236A cannot output at the given frequency")
+        if freq == 3000:
+            self.frequency_reg = 0x00
+        elif freq == 22000:
+            self.frequency_reg = 0x01
+        else:
+            raise ValueError("IS31FL3236A cannot output at the given frequency")
 
-	def __enter__(self):
-		return self
+    def __enter__(self):
+        return self
 
     def __exit__(self, exception_type, exception_value, traceback):
         self.deinit()
