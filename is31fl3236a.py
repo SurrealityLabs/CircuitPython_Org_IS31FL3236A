@@ -32,8 +32,6 @@ Implementation Notes
 __version__ = "0.0.0-auto.0"
 __repo__ = "https://github.com/SurrealityLabs/CircuitPython_Org_IS31FL3236A.git"
 
-import time
-
 from adafruit_register.i2c_struct import UnaryStruct
 from adafruit_register.i2c_struct_array import StructArray
 from adafruit_bus_device import i2c_device
@@ -107,9 +105,9 @@ class IS31FL3236A:
 
     # Registers:
     shutdown_reg = UnaryStruct(0x00, "<B")
-    pwm_regs = UnaryStructArray(0x01, "<B", 36)
+    pwm_regs = StructArray(0x01, "<B", 36)
     apply_reg = UnaryStruct(0x25, "<B")
-    led_regs = UnaryStructArray(0x26, "<B", 36)
+    led_regs = StructArray(0x26, "<B", 36)
     global_control_reg = UnaryStruct(0x4A, "<B")
     frequency_reg = UnaryStruct(0x4B, "<B")
     reset_reg = UnaryStruct(0x4C, "<B")
@@ -127,11 +125,13 @@ class IS31FL3236A:
 
     @property
     def frequency(self):
-        """The overall PWM frequency in Hertz. Valid values for IS31FL3236A are 3000 Hz and 22000 Hz"""
+        """The overall PWM frequency in Hertz. Valid values for IS31FL3236A are 3000 and 22000 Hz"""
+        freq = 0
         if self.frequency_reg == 0x00:
-            return 3000
+            freq = 3000
         else:
-            return 220000
+            freq = 220000
+        return freq
 
     @frequency.setter
     def frequency(self, freq):
